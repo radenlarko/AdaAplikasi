@@ -1,0 +1,15 @@
+.main-page {
+    display: flex;
+    height: 100%;
+}
+
+.left {
+    flex: 1;
+    width: 65%;
+    background-color: teal;
+}
+
+.right {
+    width: 35%;
+    background-color: tomato;
+}
