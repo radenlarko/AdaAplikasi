@@ -1,3 +1,3 @@
 # AdaAplikasi
 Belajar React Native by YouTube Channel Wahidev Academy
-Coba edit github
+Belajar React JS by YouTube Channel Prawito Hudoro
