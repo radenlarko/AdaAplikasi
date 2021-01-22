@@ -1,25 +1,27 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { MainApp, Login, Register } from '../../pages'
+import { CreateBlog, DetailBlog, Home } from '..'
 
-const Routes = () => {
+const MainApp = () => {
     return (
         <div>
+            <p>Header</p>
             <Router>
                 <Switch>
-                    <Route path="/login">
-                        <Login />
+                    <Route path="/create-blog">
+                        <CreateBlog />
                     </Route>
-                    <Route path="/register">
-                        <Register />
+                    <Route path="/detail-blog">
+                        <DetailBlog />
                     </Route>
                     <Route path="/">
-                        <MainApp />
+                        <Home />
                     </Route>
                 </Switch>
             </Router>
+            <p>Footer</p>
         </div>
     )
 }
 
-export default Routes
+export default MainApp
