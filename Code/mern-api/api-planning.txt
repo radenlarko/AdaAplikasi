@@ -1,6 +1,6 @@
 Standar API
 
-[METHOD] : {rot.aoi}/{version}/{grouping}/{endpoint}
+[METHOD] : {root.api}/{version}/{grouping}/{endpoint}
 SAMPLE:
 [POST] : http://mern-api.adaaplikasi.com/v1/auth/login
 
@@ -21,7 +21,7 @@ Standar Status Response
 
 GROUP: Authentication
 [1] - Register
-    [POST] : {rot.aoi}/{version}/auth/register
+    [POST] : {root.api}/{version}/auth/register
     req: 
     {
         "name": "Testing",
@@ -44,7 +44,7 @@ GROUP: Authentication
     400 --> Input yang anda masukan tidak valid!
 
 [2] - login
-    [POST] : {rot.aoi}/{version}/auth/login
+    [POST] : {root.api}/{version}/auth/login
     req: 
     {
         "email": "email@email.com",
@@ -69,6 +69,34 @@ GROUP: Authentication
 
 GROUP: BLOG
 [1] - Create Blog Post
+    [POST] : {root.api}/{version}/blog/post
+    req: 
+    {
+        "title": "Title Blog",
+        "image": "imagefile.jpg",
+        "body": "isi artikel atau blog"
+    }
+
+    res:
+    {
+        "message": "Create Blog Post Success!",
+        "data": {
+            "post_id": 1,
+            "title": "Title Blog",
+            "image": "imagefile.jpg",
+            "body": "isi artikel atau blog",
+            "created_at": "23/01/2021",
+            "author": {
+                "uid": 1,
+                "name": "Testing"
+            }
+        }
+    }
+
+    err-response:
+    201 --> Blog Post berhasil dibuat!
+    400 --> Input yang anda masukan tidak valid!
+
 [2] - Get Blog Post
 [3] - Update Blog Post
 [4] - Delete Blog Post
