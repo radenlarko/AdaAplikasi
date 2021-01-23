@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const app = express();
 const authRoutes = require('./src/routes/auth');
@@ -25,4 +26,8 @@ app.use((error, req, res, next) => {
     res.status(status).json({message: message, data: data});
 })
 
-app.listen(4000);
+mongoose.connect('mongodb://yossularko:IOE1GQIk5bEJtfcH@cluster0-shard-00-00.svpie.mongodb.net:27017,cluster0-shard-00-01.svpie.mongodb.net:27017,cluster0-shard-00-02.svpie.mongodb.net:27017/mernstack?ssl=true&replicaSet=atlas-gwa0u7-shard-0&authSource=admin&retryWrites=true&w=majority', { useNewUrlParser: true })
+.then(() => {
+    app.listen(4000, () => console.log('Connection Success'));
+})
+.catch(err => console.log(err));
