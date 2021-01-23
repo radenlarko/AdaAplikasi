@@ -1,11 +1,13 @@
 exports.createProduct = (req, res, next) => {
+    const name = req.body.name;
+    const price = req.body.price;
     res.json(
         {
             message: 'Create product success',
             data: {
                 id: 1,
-                name: 'Sari gandum',
-                price: 8000,
+                name: name,
+                price: price
             }
         }
     );
@@ -20,7 +22,7 @@ exports.getAllProducts = (req, res, next) => {
                 {
                     id: 1,
                     name: 'Sari Gandum',
-                    price: 8000,
+                    price: 8000
                 }
             ]
         }
