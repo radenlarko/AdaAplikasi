@@ -1,0 +1,74 @@
+Standar API
+
+[METHOD] : {rot.aoi}/{version}/{grouping}/{endpoint}
+SAMPLE:
+[POST] : http://mern-api.adaaplikasi.com/v1/auth/login
+
+=========================================================================================================
+
+Standar Status Response
+
+200 - OK --> Call API Success
+201 - CREATED --> Post Success
+400 - BAD REQUEST --> Error on Client Side
+401 - UNAUTHORIZED --> User not authorized to the REQUEST
+403 - FORBIDEN --> User not allowed to access
+404 - NOT FOUND --> Request Endpoint not FOUND
+500 - INTERNAL SERVER ERROR --> Error on server side
+502 - BAD GATEWAY --> Invalid response from another request
+
+=========================================================================================================
+
+GROUP: Authentication
+[1] - Register
+    [POST] : {rot.aoi}/{version}/auth/register
+    req: 
+    {
+        "name": "Testing",
+        "email": "email@email.com",
+        "password": "123432"
+    }
+
+    res:
+    {
+        "message": "Register Success!",
+        "data": {
+            "uid": 1,
+            "name": "Testing",
+            "email": "email@email.com"
+        }
+    }
+
+    err-response:
+    201 --> Register Berhasil!
+    400 --> Input yang anda masukan tidak valid!
+
+[2] - login
+    [POST] : {rot.aoi}/{version}/auth/login
+    req: 
+    {
+        "email": "email@email.com",
+        "password": "123432"
+    }
+
+    res:
+    {
+        "message": "login Success!",
+        "data": {
+            "uid": 1,
+            "email": "email@email.com",
+            "token": "JD72hnJK"
+        }
+    }
+
+    err-response:
+    200 --> Login Berhasil!
+    400 --> Input yang anda masukan tidak valid!
+
+=========================================================================================================
+
+GROUP: BLOG
+[1] - Create Blog Post
+[2] - Get Blog Post
+[3] - Update Blog Post
+[4] - Delete Blog Post
