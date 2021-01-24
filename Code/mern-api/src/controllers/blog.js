@@ -1,5 +1,5 @@
 const {validationResult} = require('express-validator');
-const BlogPost = require('../models/blog-create');
+const BlogPost = require('../models/blog');
 
 exports.blogCreate = (req, res, next) => {
     const errors = validationResult(req);

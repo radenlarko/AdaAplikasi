@@ -3,11 +3,11 @@ const {body} = require('express-validator');
 
 const router = express.Router();
 
-const blogCreateController = require('../controllers/blog-create');
+const blogController = require('../controllers/blog');
 
 router.post('/post', [
     body('title').isLength({min: 5}).withMessage('Input Title tidak sesuai'), 
     body('body').isLength({min: 5}).withMessage('Isi Artikel tidak sesuai')], 
-    blogCreateController.blogCreate);
+    blogController.blogCreate);
 
 module.exports = router;
