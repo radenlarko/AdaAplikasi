@@ -1,12 +1,31 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const multer = require('multer');
 
 const app = express();
 const authRoutes = require('./src/routes/auth');
 const blogCreateRoutes = require('./src/routes/blog-create');
 
+const fileStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'images');
+    },
+    filename: (req, file, cb) => {
+        cb(null, new Date().getTime() + '-' + file.originalname);
+    }
+})
+
+const fileFilter = (req, file, cb) => {
+    if(file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg'){
+        cb(null, true);
+    }else {
+        cb(null, false);
+    }
+}
+
 app.use(bodyParser.json()) //Type JSON
+app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('image'));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -26,7 +45,7 @@ app.use((error, req, res, next) => {
     res.status(status).json({message: message, data: data});
 })
 
-mongoose.connect('mongodb://yossularko:IOE1GQIk5bEJtfcH@cluster0-shard-00-00.svpie.mongodb.net:27017,cluster0-shard-00-01.svpie.mongodb.net:27017,cluster0-shard-00-02.svpie.mongodb.net:27017/mernstack?ssl=true&replicaSet=atlas-gwa0u7-shard-0&authSource=admin&retryWrites=true&w=majority', { useNewUrlParser: true })
+mongoose.connect('mongodb://yossularko:IOE1GQIk5bEJtfcH@cluster0-shard-00-00.svpie.mongodb.net:27017,cluster0-shard-00-01.svpie.mongodb.net:27017,cluster0-shard-00-02.svpie.mongodb.net:27017/mernstack?ssl=true&replicaSet=atlas-gwa0u7-shard-0&authSource=admin&retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => {
     app.listen(4000, () => console.log('Connection Success'));
 })
