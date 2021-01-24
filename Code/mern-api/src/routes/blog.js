@@ -10,4 +10,6 @@ router.post('/post', [
     body('body').isLength({min: 5}).withMessage('Isi Artikel tidak sesuai')], 
     blogController.blogCreate);
 
+router.get('/posts', blogController.blogGetAll);
+
 module.exports = router;
