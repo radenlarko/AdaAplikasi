@@ -1,4 +1,7 @@
 const {validationResult} = require('express-validator');
+const { dirname } = require('path');
+const path = require('path');
+const fs = require('fs');
 const BlogPost = require('../models/blog');
 
 exports.blogCreate = (req, res, next) => {
@@ -116,4 +119,32 @@ exports.blogUpdate = (req, res, next) => {
     .catch(err => {
         next(err);
     })
+}
+
+exports.blogDelete = (req, res, next) => {
+    const postId = req.params.postId;
+    BlogPost.findById(postId)
+    .then(post => {
+        if(!post){
+            const err = new Error('Data tidak ditemukan');
+            err.errorStatus = 404;
+            throw err;
+        }
+        removeImage(post.image);
+        return BlogPost.findByIdAndRemove(postId);
+    })
+    .then(result => {
+        res.status(200).json({
+            message: 'Blog Berhasil dihapus!',
+            data: result
+        })
+    })
+    .catch(err => {
+        next(err);
+    })
+}
+
+const removeImage = (filePath) => {
+    filePath = path.join(__dirname, '../..', filePath);
+    fs.unlink(filePath, err => console.log(err));
 }

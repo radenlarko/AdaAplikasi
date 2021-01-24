@@ -17,4 +17,6 @@ router.put('/post/:postId', [
     body('body').isLength({min: 5}).withMessage('Isi Artikel tidak sesuai')],
     blogController.blogUpdate);
 
+router.delete('/post/:postId', blogController.blogDelete);
+
 module.exports = router;

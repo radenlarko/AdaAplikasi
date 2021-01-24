@@ -47,7 +47,7 @@ app.use((error, req, res, next) => {
     res.status(status).json({message: message, data: data});
 })
 
-mongoose.connect('mongodb://yossularko:IOE1GQIk5bEJtfcH@cluster0-shard-00-00.svpie.mongodb.net:27017,cluster0-shard-00-01.svpie.mongodb.net:27017,cluster0-shard-00-02.svpie.mongodb.net:27017/mernstack?ssl=true&replicaSet=atlas-gwa0u7-shard-0&authSource=admin&retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://yossularko:IOE1GQIk5bEJtfcH@cluster0-shard-00-00.svpie.mongodb.net:27017,cluster0-shard-00-01.svpie.mongodb.net:27017,cluster0-shard-00-02.svpie.mongodb.net:27017/mernstack?ssl=true&replicaSet=atlas-gwa0u7-shard-0&authSource=admin&retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 .then(() => {
     app.listen(4000, () => console.log('Connection Success'));
 })
