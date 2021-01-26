@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { BlogItem, Button, Gap } from '../../components'
 import './home.scss'
 import {useHistory} from 'react-router-dom'
@@ -7,19 +7,20 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const Home = () => {
     // const [dataBlog, setDataBlog] = useState([]);
-    const {dataBlogs, name} = useSelector(state => state);
+    // const {dataBlogs, name} = useSelector(state => state);
+    const {dataBlog} = useSelector(state => state.homeReducer);
     const dispatch = useDispatch();
 
-    // console.log('State global :', stateGlobal);
-    console.log('State Blog Global :', dataBlogs);
+    // console.log('State global :', dataBlogs);
+    // console.log('State Blog Global :', dataBlogs);
     useEffect(() => {
-        setTimeout(() => {
-            dispatch({type: 'UPDATE_NAME'})
-        }, 3000);
+        // setTimeout(() => {
+        //     dispatch({type: 'UPDATE_NAME'})
+        // }, 3000);
 
         axios.get('http://localhost:4000/v1/blog/posts?page=2&perPage=3')
         .then(result => {
-            console.log('data API', result.data);
+            // console.log('data API', result.data);
             const responseAPI = result.data;
 
             // setDataBlog(responseAPI.data);
@@ -28,17 +29,17 @@ const Home = () => {
         .catch(err => {
             console.log('error: ', err);
         })
-    }, [])
+    }, [dispatch])
     const history = useHistory();
     return (
         <div className="home-page-wrapper">
             <div className="create-wrapper">
                 <Button title="Create Blog" onClick={() => history.push('/create-blog')} />
             </div>
-    <p>{name}</p>
+    {/* <p>{name}</p> */}
             <Gap height={20} />
             <div className="content-wrapper">
-                {dataBlogs.map(blog => {
+                {dataBlog.map(blog => {
                     return (
                         <BlogItem 
                             key={blog._id} 
